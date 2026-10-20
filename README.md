@@ -77,6 +77,10 @@ npm run dev
 
 The downloadable ZIP excludes dependencies, build output and local environment secrets. `.env.example` documents optional public integration overrides. The public Web3Forms key is deliberately client-visible; it is not a private authentication secret. Never add private API credentials to client code.
 
+## Photo distribution
+
+Owner-supplied JPEG photographs are included only in the private downloadable project. Their publication to this public repository was blocked by automatic approval review pending explicit owner approval for public disclosure. The public source deliberately excludes those files. Every photo component falls back to a clearly described sample illustration if a photo is absent, so the public checkout remains functional. Copy approved photos into `public/images` using the filenames in `public/images/ASSETS.md` to enable the photo composition locally. The downloaded full project already includes them.
+
 ## Design revision
 
 The owner rejected the first, overly traditional design. The second pass follows the authenticated reference's rounded surfaces, bold sans-serif typography and pastel gradient accents while adding a photo collage and restrained motion. The supplied reference was inspected in the browser without editing it. Existing sample catalog values are not taken as confirmed business facts.
