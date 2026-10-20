@@ -5,3 +5,6 @@ out
 !.env.example
 *.tsbuildinfo
 
+
+# Identifiable owner portrait is local-only pending explicit public GitHub approval.
+/public/images/owner/arpita-prajapati.jpg

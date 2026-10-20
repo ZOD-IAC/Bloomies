@@ -98,3 +98,13 @@ The owner rejected the first, overly traditional design. The second pass follows
 No Vercel deployment was created by the assistant. Once a Git-connected Vercel project exists, future pushes to its configured production branch can trigger deployments. Review both themes on desktop and mobile, add differently personalized items, reload the cart, inspect the WhatsApp draft, and submit a contact inquiry only when ready to test actual delivery. Confirm Web3Forms domain restrictions in the owner account for the chosen Vercel/custom domain.
 
 Official references: https://vercel.com/docs/git , https://vercel.com/docs/frameworks/full-stack/nextjs , https://vercel.com/docs/functions/runtimes/node-js/node-js-versions .
+
+## Owner introduction and theme correction
+
+The shared `OwnerSection` component appears on Home and About, using the owner name Arpita Prajapati and the supplied original portrait. No founder quotation, biography, experience claims or credentials were invented. Pink and lilac collection cards now derive their text from theme-aware colors; their descriptive text opacity was also raised for legibility. Peach/sage cards retain dark text on their pale backgrounds in both themes.
+
+## Dependency audit status
+
+Run `npm audit` for the full development tree and `npm run audit:production` for production dependencies. On 2026-10-20, the full tree reported five high entries through the Next.js ESLint → fast-glob → micromatch → braces chain; the production-only audit reported zero vulnerabilities. The upstream advisory lists no patched braces version. Do not run `npm audit fix --force`: its suggested Next.js lint-config downgrade is not appropriate for this Next.js 16 project. Full details and the remaining ESLint support warning are in `docs/dependency-security.md`. No audit findings have been suppressed, and the current full audit is not clean.
+
+The owner portrait is currently local-only: automatic approval review requires explicit permission to publish this identifiable person’s photo to the public GitHub repository. The public source displays an accessible AP monogram fallback when the portrait file is absent. The local version uses the supplied photo. No portrait bytes have been uploaded to GitHub.

@@ -1,3 +1,4 @@
+import { OwnerSection } from "@/components/owner-section";
 import Image from "@/components/brand-image";
 import Link from "next/link";
 import {
@@ -224,6 +225,7 @@ export default async function Home() {
           </div>
         </Reveal>
       </section>
+      <OwnerSection />
       <section className="how-section container">
         <Reveal className="section-heading">
           <div>

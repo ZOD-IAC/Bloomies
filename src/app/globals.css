@@ -756,6 +756,7 @@ header {
 }
 .collection-pink {
   background: var(--pink);
+  --collection-text: var(--ink);
 }
 .collection-peach {
   background: #f1dfd4;
@@ -765,6 +766,7 @@ header {
 }
 .collection-lilac {
   background: var(--lilac);
+  --collection-text: var(--ink);
 }
 .collection-image {
   height: 300px;
@@ -810,7 +812,7 @@ header {
 }
 .collection-copy {
   padding: 25px 20px 20px;
-  color: #44304c;
+  color: var(--collection-text, #44304c);
 }
 .collection-copy .eyebrow {
   font-size: 8px;
@@ -823,7 +825,7 @@ header {
 }
 .collection-copy > p:last-child {
   font-size: 10px;
-  opacity: 0.7;
+  opacity: 0.82;
   margin: 0;
 }
 .collection-extra {
@@ -2709,4 +2711,190 @@ html[data-theme="dark"] .hero-v2 {
   .collection-copy h3 {
     font-size: 22px;
   }
+}
+
+/* Shared owner introduction: supplied portrait, original appearance preserved. */
+.owner-section {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 95px;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 85px;
+}
+.owner-portrait-panel {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  padding: 13px 13px 0;
+  border: 1px solid var(--line);
+  border-radius: 180px 180px 22px 22px;
+  background: var(--surface);
+  transform: rotate(-2deg);
+}
+.owner-portrait {
+  height: 475px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 170px 170px 12px 12px;
+  background: var(--pink);
+}
+.owner-portrait img {
+  object-fit: cover;
+  object-position: 50% 36%;
+}
+.owner-photo-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 10px;
+  color: var(--accent);
+}
+.owner-photo-caption span {
+  font-family: var(--font-serif), var(--serif);
+  font-style: italic;
+  font-size: 20px;
+}
+.owner-flower {
+  position: absolute;
+  bottom: 85px;
+  right: -34px;
+  font-size: 95px;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow:
+    3px 3px 0 var(--bg),
+    -3px -3px 0 var(--bg);
+  transform: rotate(12deg);
+}
+.owner-copy h2 {
+  font-size: clamp(40px, 4.5vw, 61px);
+  margin-top: 18px;
+  margin-bottom: 27px;
+}
+.owner-identity {
+  padding-left: 16px;
+  border-left: 2px solid var(--accent);
+  margin-bottom: 24px;
+}
+.owner-identity h3 {
+  font-size: 23px;
+  margin-bottom: 4px;
+  letter-spacing: -0.025em;
+}
+.owner-identity p {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+}
+.owner-copy > p:not(.eyebrow) {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 430px;
+}
+.owner-copy .button {
+  margin-top: 13px;
+}
+.about-page + .owner-section {
+  padding-top: 0;
+}
+.about-page:has(+ .owner-section) {
+  padding-bottom: 40px;
+  min-height: 0;
+}
+@media (max-width: 1000px) {
+  .owner-section {
+    gap: 55px;
+  }
+  .owner-portrait {
+    height: 440px;
+  }
+  .owner-flower {
+    font-size: 80px;
+    right: -24px;
+  }
+}
+@media (max-width: 700px) {
+  .owner-section {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-top: 35px;
+    padding-bottom: 55px;
+  }
+  .owner-portrait-panel {
+    width: calc(100% - 20px);
+    max-width: 375px;
+    margin: auto;
+    padding: 10px 10px 0;
+    border-radius: 155px 155px 18px 18px;
+  }
+  .owner-portrait {
+    height: 410px;
+    border-radius: 145px 145px 10px 10px;
+  }
+  .owner-photo-caption {
+    padding: 14px 8px;
+  }
+  .owner-photo-caption span {
+    font-size: 18px;
+  }
+  .owner-flower {
+    font-size: 72px;
+    right: -20px;
+    bottom: 65px;
+  }
+  .owner-copy h2 {
+    font-size: 45px;
+    margin-bottom: 24px;
+  }
+  .owner-copy .eyebrow {
+    font-size: 9px;
+  }
+  .owner-copy > p:not(.eyebrow) {
+    font-size: 12px;
+    max-width: none;
+  }
+  .owner-identity h3 {
+    font-size: 22px;
+  }
+  .owner-copy .button {
+    font-size: 11px;
+  }
+  .about-page + .owner-section {
+    padding-top: 10px;
+  }
+}
+
+.about-story {
+  padding-bottom: 90px;
+}
+@media (max-width: 700px) {
+  .about-story {
+    padding-bottom: 55px;
+  }
+}
+
+.owner-initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.owner-initials > span {
+  font-family: var(--font-serif), var(--serif);
+  font-size: 110px;
+  line-height: 1;
+  color: var(--accent);
+}
+.owner-initials > p {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin: 0;
 }
