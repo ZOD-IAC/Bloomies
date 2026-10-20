@@ -3013,3 +3013,57 @@ html[data-theme="dark"] .hero-v2 {
     font-size: 9px;
   }
 }
+
+/* Keep successful additions visible and prevent accidental repeat submissions. */
+:root {
+  --success-bg: #e9f1e6;
+  --success-ink: #325536;
+  --success-line: #c5d7be;
+}
+html[data-theme="dark"] {
+  --success-bg: #25392b;
+  --success-ink: #daf1d9;
+  --success-line: #45634c;
+}
+.options .button-added:disabled {
+  opacity: 1;
+  cursor: default;
+  background: var(--success-bg);
+  color: var(--success-ink);
+  border-color: var(--success-line);
+  transform: none;
+  box-shadow: none;
+}
+.add-feedback > p {
+  margin: 0;
+}
+.add-feedback-success {
+  padding: 18px;
+  background: var(--success-bg);
+  border: 1px solid var(--success-line);
+  border-radius: 14px;
+}
+.options .add-feedback-success > p {
+  color: var(--success-ink);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.add-feedback-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.add-feedback-actions .button {
+  min-height: 45px;
+  padding: 11px 18px;
+  font-size: 11px;
+}
+.add-another {
+  font-size: 11px;
+  color: var(--success-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 5px;
+}

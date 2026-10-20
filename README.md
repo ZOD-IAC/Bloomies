@@ -105,7 +105,7 @@ The shared `OwnerSection` component appears on Home and About, using the owner n
 
 ## Dependency audit status
 
-Run `npm audit` for the full development tree and `npm run audit:production` for production dependencies. On 2026-10-20, the full tree reported five high entries through the Next.js ESLint → fast-glob → micromatch → braces chain; the production-only audit reported zero vulnerabilities. The upstream advisory lists no patched braces version. Do not run `npm audit fix --force`: its suggested Next.js lint-config downgrade is not appropriate for this Next.js 16 project. Full details and the remaining ESLint support warning are in `docs/dependency-security.md`. No audit findings have been suppressed, and the current full audit is not clean.
+Run `npm audit` for the full development tree and `npm run audit:production` for production dependencies. Both now report **zero vulnerabilities**. A version-scoped npm alias replaces only the Next.js ESLint plugin's `fast-glob` implementation with the compatible `globSync` API from `tinyglobby@0.2.17`, which was already in the lint dependency graph. This removes the unpatched braces chain while keeping Next.js 16 and all official lint rules. No audit findings are suppressed. The compatibility rationale, tests and upgrade/removal instructions are in `docs/dependency-security.md`. An independent ESLint deprecation warning may remain until its peer-dependent lint plugins support the newer major.
 
 The owner explicitly approved public GitHub upload of the supplied portrait on 2026-10-20. The image is included at `public/images/owner/arpita-prajapati.jpg`; accessible AP initials remain as a fallback if a future replacement fails to load.
 
@@ -128,3 +128,7 @@ Each main page and collection has its own title, description, canonical URL, Ope
 Favicon source: `public/brand/mark.svg`, with a flower/B monogram that matches the palette. Generated assets: `src/app/favicon.ico`, `src/app/icon.svg`, `src/app/apple-icon.png`. Social card source/output: `public/brand/social-preview.svg` / `.png`. To revise them, edit the source SVGs and run `node scripts/generate-brand-assets.mjs` after `npm ci`. The helper uses sharp already installed by Next.js; it does not run during normal builds. No new application dependencies were added.
 
 After the Vercel deployment is ready, verify the sitemap, robots, canonicals, share preview and favicon against the live domain. Add the site to Google Search Console yourself, complete ownership verification and submit `/sitemap.xml`. Rankings, indexing times and rich-result display cannot be guaranteed. No Search Console account changes were made by the assistant.
+
+## Inquiry-bag addition feedback
+
+A successful product addition immediately changes the button to “Added to inquiry bag” and displays the quantity/product name with a “View inquiry bag” link. The same selection cannot be accidentally submitted repeatedly; a synchronous guard covers repeat submissions before the button re-renders. To add it again intentionally, choose “Add more of this gift” or change the selected options/quantity. The feedback uses an accessible live status region and supports both themes.

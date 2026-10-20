@@ -1,23 +1,46 @@
-# Dependency audit review — 2026-10-20
+# Dependency security review — 2026-10-20
 
-## Current verified state
+## Current state
 
-- `npm audit`: 5 **high**, 0 critical; all five are entries in one development-tool dependency chain.
-- `npm audit --omit=dev`: **0 vulnerabilities** at the time of review.
-- Chain: `eslint-config-next@16.4.2` → `@next/eslint-plugin-next@16.4.2` → `fast-glob@3.3.1` → `micromatch@4.0.8` → `braces@3.0.3`.
-- Advisory: https://github.com/advisories/GHSA-vfj7-8cjw-p6xm . It concerns stack exhaustion from deeply nested brace patterns. The reviewed advisory lists no patched version.
-- Registry checks at review time: `braces@3.0.3` is latest, as are `eslint-config-next@16.4.2` and `@next/eslint-plugin-next@16.4.2`. Upgrading these to the latest stable version does not remove the chain.
+A version-scoped compatibility override removes the vulnerable development-tool chain. The full `npm audit` and the production-only audit report **zero vulnerabilities** after this change. The original finding was five high entries in one chain, not five separate critical vulnerabilities.
 
-## Scope and decision
+The upstream braces advisory still lists no patched version. This change removes that dependency from the installed graph; it does not claim to patch upstream braces, suppress audit findings, downgrade Next.js or disable lint rules.
 
-The identified dependency is used by lint tooling to process Next.js root-directory glob settings. It is not in the production dependency tree, and the storefront does not accept user-provided glob patterns. This limits the demonstrated exposure; it does not erase the upstream finding or imply that every possible build environment is safe.
+## Remediation
 
-Do not use `npm audit fix --force`. The proposed change downgrades `eslint-config-next` to 14.2.35 while the application uses Next.js 16 and ESLint flat configuration. Do not hide the report with audit exclusions, substitute an incompatible brace-expansion library, or create a local fork solely to obtain a clean scanner result. Keep framework-specific lint rules enabled.
+```json
+"overrides": {
+  "@next/eslint-plugin-next@16.4.2": {
+    "fast-glob": "npm:tinyglobby@0.2.17"
+  }
+}
+```
 
-The independent `eslint@9.39.5` deprecation/support warning remains. The registry's latest ESLint is 10.13.0, but the installed `eslint-plugin-react@7.37.5` declares compatibility only through ESLint 9. A forced major upgrade is not justified. Upgrade the lint toolchain together when compatible upstream releases are available.
+The installed Next.js plugin has one `fast-glob` import, in `dist/utils/get-root-dirs.js`. It uses only the named CommonJS `globSync(pattern, { onlyDirectories: true })` API after normalizing backslashes. `tinyglobby@0.2.17` supports that API and is already installed through the TypeScript lint tooling. A nested npm alias supplies this existing maintained implementation for that exact consumer/version. Other consumers are unaffected. The package lock records the exact replacement and integrity hashes.
 
-No dependency version was changed for this review. This repository still has the full-tree development findings above. The production-only audit is an additional scope check, not a replacement for the full audit.
+This removes `fast-glob`'s original `micromatch` → `braces` dependency path while preserving the official `eslint-config-next` and Next.js plugin. No fork, local node_modules patch, audit exclusion or new runtime dependency is used.
 
-## Follow-up
+## Validation and maintenance
 
-Run both audits after dependency updates. Recheck the advisory and compatible Next.js/ESLint releases, then update the manifest and lockfile together and run lint, TypeScript checks, tests and the production build. Do not expose build/lint tools to untrusted patterns.
+`tests/lint-compatibility.test.ts` exercises the actual Next.js root-directory helper with default, absolute, wildcard, brace-alternative, array and Windows-style paths, including directory-only filtering. It also verifies that the official Next.js no-img-element rule still detects an unoptimized image. The complete lint, type checks, tests and production build are run with the replacement installed.
+
+The alias is deliberately scoped to plugin **16.4.2**. Reinspect the plugin's glob usage, run the compatibility tests and both audits before changing its version or extending the override. Remove the override once a compatible upstream Next.js release removes the vulnerable chain. `tinyglobby` is not being asserted to implement the entire fast-glob API for arbitrary consumers.
+
+The independent ESLint 9 deprecation warning may remain: the installed React lint plugin's peer range does not yet permit ESLint 10. This warning is separate from the five resolved vulnerability findings. Do not force an incompatible major upgrade just to remove a deprecation message.
+
+## Local update
+
+```bash
+git pull origin main
+npm ci
+npm audit
+npm run audit:production
+```
+
+Do not use `npm audit fix --force`. Keep the manifest and lockfile together.
+
+Primary references:
+
+- https://github.com/advisories/GHSA-vfj7-8cjw-p6xm
+- https://github.com/SuperchupuDev/tinyglobby
+- https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#overrides
