@@ -41,8 +41,8 @@ export default async function Page({
             src={p.images[0]}
             alt={imageAlt(p)}
             sizes="(max-width:700px) 90vw, 50vw"
-            width={500}
-            height={600}
+            fill
+            style={{ objectPosition: p.imagePosition }}
             priority
           />
         </div>

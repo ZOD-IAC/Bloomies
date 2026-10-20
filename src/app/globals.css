@@ -1317,6 +1317,7 @@ textarea {
   align-items: start;
 }
 .detail-image {
+  aspect-ratio: 4 / 5;
   border-radius: 24px;
   overflow: hidden;
   background: var(--surface);
@@ -1325,7 +1326,8 @@ textarea {
 }
 .detail-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 .product-detail h1 {
@@ -2342,10 +2344,6 @@ details p {
   .detail-image {
     position: relative;
     top: auto;
-  }
-  .detail-image img {
-    max-height: 550px;
-    object-fit: contain;
   }
   .product-detail h1 {
     font-size: 47px;
