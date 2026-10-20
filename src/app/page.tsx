@@ -26,7 +26,7 @@ const collections = [
     name: "A sweet little yes.",
     label: "CHOCOLATE GIFTS",
     cat: "chocolate",
-    image: "/images/product-3.svg",
+    image: "/images/ai/chocolate-bouquet.webp",
     className: "collection-peach",
     description: "Their sweet spot, beautifully wrapped.",
   },
@@ -103,7 +103,7 @@ export default async function Home() {
                 <div className="collection-image">
                   <Image
                     src={c.image}
-                    alt={`${c.label.toLowerCase()} — supplied reference or sample illustration`}
+                    alt={`${c.label.toLowerCase()} — supplied reference or AI-generated concept`}
                     fill
                     sizes="(max-width:700px) 45vw, 25vw"
                   />
@@ -129,7 +129,7 @@ export default async function Home() {
             Gift boxes <Gift size={14} />
           </Link>
           <span>
-            Photo references & sample concepts · catalog details awaiting
+            AI concepts & supplied references · catalog details awaiting
             confirmation
           </span>
         </div>
@@ -152,7 +152,7 @@ export default async function Home() {
             </Link>
           </Reveal>
           <div className="product-grid">
-            {[products[0], products[3], products[6], products[1]].map(
+            {[products[8], products[2], products[4], products[10]].map(
               (p, i) => (
                 <Reveal key={p.id} delay={i * 0.08}>
                   <ProductCard product={p} />

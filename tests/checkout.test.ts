@@ -60,3 +60,19 @@ test("multiple cart lines sum correctly", () => {
     ).includes("₹3400"),
   );
 });
+
+test("AI product inquiries explicitly require final-design confirmation", () => {
+  const ai = { ...p, imageKind: "ai" as const };
+  const message = checkoutMessage(
+    [
+      {
+        productId: "1",
+        quantity: 1,
+        variant: "Ribbon wrap",
+        personalization: "",
+      },
+    ],
+    [ai],
+  );
+  assert.ok(message.includes("AI concept — final design to confirm"));
+});

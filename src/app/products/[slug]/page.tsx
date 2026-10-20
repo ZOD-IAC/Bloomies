@@ -1,3 +1,4 @@
+import { imageAlt, imageLabel } from "@/lib/product-imagery";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "@/components/brand-image";
@@ -31,7 +32,7 @@ export default async function Page({
         <div className="detail-image">
           <Image
             src={p.images[0]}
-            alt={`${p.imageKind === "reference" ? "Supplied inspiration reference" : "Sample illustration"} for ${p.name}`}
+            alt={imageAlt(p)}
             sizes="(max-width:700px) 90vw, 50vw"
             width={500}
             height={600}
@@ -39,16 +40,20 @@ export default async function Page({
           />
         </div>
         <div>
-          <p className="eyebrow">{p.category} · SAMPLE CONCEPT</p>
+          <p className="eyebrow">
+            {p.category} · {imageLabel(p)}
+          </p>
           <h1>{p.name}</h1>
           <p className="detail-price">
             {money(p.price)} <small>illustrative price</small>
           </p>
           <p className="intro">{p.description}</p>
           <p className="notice">
-            Sample catalog item. Supplied photos are inspiration references and
-            may include third-party branding. Price, availability, contents and
-            options are awaiting confirmation. No stock claim is made.
+            {p.imageKind === "ai"
+              ? "AI-generated product concept, not a photograph of an actual stocked item. Final design, contents and options may differ and need owner confirmation."
+              : "Supplied photos are inspiration references and may include third-party branding."}{" "}
+            All prices and availability are unconfirmed samples. No stock claim
+            is made.
           </p>
           <ProductOptions product={p} />
           <details>

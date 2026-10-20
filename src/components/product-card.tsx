@@ -1,3 +1,4 @@
+import { imageAlt, imageLabel } from "@/lib/product-imagery";
 import Link from "next/link";
 import Image from "@/components/brand-image";
 import { ArrowUpRight } from "lucide-react";
@@ -9,17 +10,13 @@ export function ProductCard({ product: p }: { product: Product }) {
       <div className="product-image" style={{ background: p.color }}>
         <Image
           src={p.images[0]}
-          alt={`${p.imageKind === "reference" ? "Supplied inspiration reference" : "Sample illustration"} for ${p.name}`}
+          alt={imageAlt(p)}
           width={500}
           height={600}
           style={{ objectPosition: p.imagePosition }}
           sizes="(max-width: 700px) 45vw, 25vw"
         />
-        <span className="sample-label">
-          {p.imageKind === "reference"
-            ? "INSPIRATION REFERENCE"
-            : "SAMPLE CONCEPT"}
-        </span>
+        <span className="sample-label">{imageLabel(p)}</span>
         <span className="card-arrow">
           <ArrowUpRight size={20} />
         </span>

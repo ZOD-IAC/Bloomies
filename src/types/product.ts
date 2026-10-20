@@ -14,7 +14,7 @@ export type Product = {
   price: number;
   availability: "sample" | "available" | "unavailable" | "on-request";
   images: string[];
-  imageKind?: "reference" | "illustration";
+  imageKind?: "reference" | "illustration" | "ai";
   imagePosition?: string;
   variants: string[];
   personalization: boolean;

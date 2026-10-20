@@ -5,6 +5,3 @@ out
 !.env.example
 *.tsbuildinfo
 
-# Owner-supplied photographs: local-only until approved for public GitHub upload.
-public/images/*.jpeg
-public/images/*.jpg

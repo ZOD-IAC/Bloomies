@@ -4,7 +4,7 @@ Next.js App Router + TypeScript storefront for discovering handcrafted gifts and
 
 ## Run locally
 
-Requires Node.js 22.18+ (Node 24 recommended).
+Requires Node.js 24.x, matching the configured Vercel runtime.
 
 ```bash
 npm ci
@@ -16,12 +16,12 @@ Open http://localhost:3000. For production locally: `npm run build && npm start`
 
 ## Implemented
 
-- Homepage, searchable/filterable/sortable shop, six collection pages, eight dynamic product pages, cart, about, contact, and custom bouquet coming-soon page.
+- Homepage, searchable/filterable/sortable shop, six collection pages, twelve dynamic product pages, cart, about, contact, and custom bouquet coming-soon page.
 - Rose/lavender visual system inspired by the supplied Lovable reference; rounded navigation and hero; bold locally optimized type; layered photographic collage; animated headings, drawn underline, floating tags, scroll reveals, marquee, route entrances and hover transitions. Light/dark persistence, responsive layouts, keyboard Escape dismissal, focus indicators, skip link and reduced-motion support.
 - Typed sample catalog, async catalog adapter, product wrap options, optional personalization, quantities, locally persistent inquiry bag.
 - WhatsApp message construction with complete line items, options, notes, quantities, totals, and inquiry disclaimer. Correct URL encoding; verified number required before linking.
-- Web3Forms native form validation, honeypot, loading, success/error handling. Sending disabled honestly until configured.
-- Next Image for owner-supplied reference imagery and original sample SVG illustrations, Next local-font optimization with bundled licensed URW fonts, page metadata and not-found route.
+- Web3Forms native form validation, honeypot, loading, success/error handling. Owner-supplied public key configured; no test inquiry sent.
+- Next Image for owner-supplied reference imagery and six AI-generated product concepts (optimized WebP), with original SVG fallbacks, Next local-font optimization with bundled licensed URW fonts, page metadata and not-found route.
 - Small customized shadcn-style Button using Radix Slot + CVA; no full UI kit or state management library.
 
 ## Configure the real business
@@ -77,10 +77,24 @@ npm run dev
 
 The downloadable ZIP excludes dependencies, build output and local environment secrets. `.env.example` documents optional public integration overrides. The public Web3Forms key is deliberately client-visible; it is not a private authentication secret. Never add private API credentials to client code.
 
-## Photo distribution
+## Catalog images and review content
 
-Owner-supplied JPEG photographs are included only in the private downloadable project. Their publication to this public repository was blocked by automatic approval review pending explicit owner approval for public disclosure. The public source deliberately excludes those files. Every photo component falls back to a clearly described sample illustration if a photo is absent, so the public checkout remains functional. Copy approved photos into `public/images` using the filenames in `public/images/ASSETS.md` to enable the photo composition locally. The downloaded full project already includes them.
+The owner explicitly approved publishing all seven supplied photos to the public GitHub repository. They are included under `public/images`, unmodified, and retain their inspiration-reference labeling where appropriate. Six additional AI images are in `public/images/ai`; two replace the original illustration-only products and four accompany new product concepts. The catalog now contains 12 sample products.
+
+AI images are labeled on cards and product pages and identified in the generated WhatsApp inquiry. They are visual concepts, not photos of stocked products. Confirm designs, prices, contents and availability with the owner before accepting orders. See `public/images/ASSETS.md` and `public/images/ai/PROMPTS.md` for provenance and the exact generation prompts. Generation used the built-in image tool; WebP derivatives are resized/compressed for the web.
 
 ## Design revision
 
 The owner rejected the first, overly traditional design. The second pass follows the authenticated reference's rounded surfaces, bold sans-serif typography and pastel gradient accents while adding a photo collage and restrained motion. The supplied reference was inspected in the browser without editing it. Existing sample catalog values are not taken as confirmed business facts.
+
+## Owner review on Vercel
+
+1. In Vercel, import `ZOD-IAC/Bloomies` from GitHub and select `main`.
+2. Framework Preset: **Next.js**. Root Directory: **./** (the repository root, not `src` or a `bloomies` subfolder).
+3. Node.js version: **24.x** (also set by `package.json`). Use the detected build command `npm run build`; installation can use `npm ci`. Leave the output directory at its Next.js default; do not set it to `public` or `out`.
+4. WhatsApp and the public Web3Forms key are configured already. Optional overrides are `NEXT_PUBLIC_WHATSAPP_NUMBER` and `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`. Redeploy after changing build-time variables.
+5. Deploy from your Vercel account when ready and share the resulting URL for owner review.
+
+No Vercel deployment was created by the assistant. Once a Git-connected Vercel project exists, future pushes to its configured production branch can trigger deployments. Review both themes on desktop and mobile, add differently personalized items, reload the cart, inspect the WhatsApp draft, and submit a contact inquiry only when ready to test actual delivery. Confirm Web3Forms domain restrictions in the owner account for the chosen Vercel/custom domain.
+
+Official references: https://vercel.com/docs/git , https://vercel.com/docs/frameworks/full-stack/nextjs , https://vercel.com/docs/functions/runtimes/node-js/node-js-versions .

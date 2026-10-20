@@ -7,7 +7,7 @@ export const categories: Category[] = [
   "Gift boxes",
   "Personalized",
 ];
-export const products: Product[] = [
+const originalProducts: Product[] = [
   [
     "lavender-love",
     "Blush & bloom",
@@ -86,15 +86,82 @@ export const products: Product[] = [
       {
         0: "/images/pink-bouquet.jpeg",
         1: "/images/flower-pot.jpeg",
+        2: "/images/ai/chocolate-bouquet.webp",
         3: "/images/skincare-bouquet.jpg",
+        4: "/images/ai/cuddle-bouquet.webp",
         5: "/images/pink-gift-box.jpeg",
         6: "/images/photo-bouquet.jpg",
         7: "/images/flower-lamp.jpeg",
       } as Record<number, string>
     )[i] || `/images/product-${i + 1}.svg`,
   ],
-  imageKind: [0, 1, 3, 5, 6, 7].includes(i) ? "reference" : "illustration",
+  imageKind: [2, 4].includes(i) ? "ai" : "reference",
   imagePosition: i === 5 ? "50% 10%" : "50% 48%",
   variants: ["Classic wrap", "Ribbon wrap"],
   personalization: true,
 }));
+
+// All entries are review concepts. Values are sample estimates, not verified quotes.
+const aiConcepts: Product[] = [
+  {
+    id: "9",
+    slug: "lavender-daydream",
+    name: "Lavender daydream",
+    category: "Flowers",
+    price: 950,
+    description:
+      "An AI-imagined everlasting bouquet of lilac daisies and lavender chenille stems, finished with cream ribbon. A design starting point; materials, size and final contents require confirmation.",
+    availability: "sample",
+    images: ["/images/ai/lavender-daydream.webp"],
+    imageKind: "ai",
+    variants: ["Lavender wrap", "Cream wrap"],
+    personalization: true,
+    color: "#e8def0",
+  },
+  {
+    id: "10",
+    slug: "mint-care-edit",
+    name: "The mint care edit",
+    category: "Skincare",
+    price: 1850,
+    description:
+      "An AI-imagined skincare bouquet in soft sage and cream. Packaging is unbranded and illustrative; real product brands, ingredients and contents must be agreed before ordering.",
+    availability: "sample",
+    images: ["/images/ai/mint-care-edit.webp"],
+    imageKind: "ai",
+    variants: ["Sage ribbon", "Cream ribbon"],
+    personalization: true,
+    color: "#e5e9dc",
+  },
+  {
+    id: "11",
+    slug: "birthday-little-joy",
+    name: "A birthday, a little joy",
+    category: "Gift boxes",
+    price: 1450,
+    description:
+      "An AI-imagined lilac gift-box arrangement with a tiny bear, chocolates, a mini bouquet and a message card. Final contents, dimensions and presentation are subject to confirmation.",
+    availability: "sample",
+    images: ["/images/ai/birthday-little-joy.webp"],
+    imageKind: "ai",
+    variants: ["Lilac box", "Blush box"],
+    personalization: true,
+    color: "#eddae5",
+  },
+  {
+    id: "12",
+    slug: "memory-envelope",
+    name: "The memory envelope",
+    category: "Personalized",
+    price: 850,
+    description:
+      "An AI-imagined keepsake envelope with blank photo-card placeholders, soft lilac flowers and blush ribbon. Discuss your memories, photos and message privately before confirming a design.",
+    availability: "sample",
+    images: ["/images/ai/memory-envelope.webp"],
+    imageKind: "ai",
+    variants: ["Cream envelope", "Blush envelope"],
+    personalization: true,
+    color: "#f0e6d9",
+  },
+];
+export const products: Product[] = [...originalProducts, ...aiConcepts];
