@@ -1,5 +1,11 @@
+import { pageMetadata } from "@/lib/seo";
 import { ContactForm } from "@/components/contact-form";
-export const metadata = { title: "Say hello" };
+export const metadata = pageMetadata(
+  "Contact Bloomies by Aadar",
+  "Discuss a personalized bouquet, gift box or custom gifting idea with Bloomies by Aadar. Reach out through WhatsApp, Instagram or the inquiry form.",
+  "/contact",
+  { noindex: false },
+);
 export default function Page() {
   return (
     <section className="container page-section contact-layout">

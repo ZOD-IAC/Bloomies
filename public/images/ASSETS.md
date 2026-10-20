@@ -6,4 +6,6 @@
 
 - `ai/*.webp`: six AI-generated product-concept images, made on 2026-10-20 with the built-in image-generation tool at the owner's request. These depict illustrative designs, not actual stock. Exact prompts and filenames are in `ai/PROMPTS.md`. The images were only resized and compressed after generation.
 
-- `owner/arpita-prajapati.jpg`: owner portrait supplied by the user for the owner section on 2026-10-20. The name Arpita Prajapati and owner role are user-provided. Local-only while explicit public-GitHub disclosure approval is pending. Original pixels, including the sunglasses effect, are preserved; only responsive CSS framing is applied. The repository uses an AP monogram fallback when the file is absent.
+- `owner/arpita-prajapati.jpg`: owner portrait supplied by the user for the owner section on 2026-10-20. The name Arpita Prajapati and owner role are user-provided. Public GitHub publication explicitly approved by the user on 2026-10-20. Original pixels, including the sunglasses effect, are preserved; only responsive CSS framing is applied. The repository uses an AP monogram fallback when the file is absent.
+
+- `../brand/mark.svg` and `../brand/social-preview.svg`: original code-native brand artwork. Raster/ICO versions are deterministic renders for favicons and social previews, not AI-generated imagery.

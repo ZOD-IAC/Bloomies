@@ -1,6 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { OwnerSection } from "@/components/owner-section";
 import Link from "next/link";
-export const metadata = { title: "Our story" };
+export const metadata = pageMetadata(
+  "Meet Arpita & the Bloomies story",
+  "Meet Arpita Prajapati, owner of Bloomies by Aadar, and explore a thoughtful world of handcrafted bouquets and personalized gifts.",
+  "/about",
+  { noindex: false },
+);
 export default function Page() {
   return (
     <>

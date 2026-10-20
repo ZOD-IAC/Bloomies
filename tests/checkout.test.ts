@@ -1,3 +1,4 @@
+import { SITE_URL } from "../src/lib/site.ts";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { checkoutMessage, whatsappUrl } from "../src/lib/checkout.ts";
@@ -75,4 +76,22 @@ test("AI product inquiries explicitly require final-design confirmation", () => 
     [ai],
   );
   assert.ok(message.includes("AI concept — final design to confirm"));
+});
+
+test("inquiries include a stable reference and clickable product URL for every line", () => {
+  const message = checkoutMessage(
+    [
+      {
+        productId: "1",
+        quantity: 1,
+        variant: "Ribbon wrap",
+        personalization: "",
+      },
+    ],
+    [p],
+  );
+  assert.ok(message.includes("Product ID: BLM-001"));
+  assert.ok(message.includes(`Product link: ${SITE_URL}/products/gift`));
+  const url = whatsappUrl("918527246489", message)!;
+  assert.equal(new URL(url).searchParams.get("text"), message);
 });

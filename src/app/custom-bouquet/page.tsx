@@ -1,5 +1,11 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
-export const metadata = { title: "Custom bouquet builder — coming soon" };
+export const metadata = pageMetadata(
+  "Custom bouquet builder — coming soon",
+  "The Bloomies custom bouquet builder is coming soon. Contact us to discuss your colours, wrap and personal touches.",
+  "/custom-bouquet",
+  { noindex: true },
+);
 export default function Page() {
   return (
     <section className="container page-section coming-soon">

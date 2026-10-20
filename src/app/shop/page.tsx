@@ -1,6 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { catalog } from "@/lib/catalog";
 import { Shop } from "@/components/shop";
-export const metadata = { title: "Shop thoughtful gifts" };
+export const metadata = pageMetadata(
+  "Shop handcrafted gift ideas",
+  "Explore bouquets, pipe-cleaner flowers, gift boxes, skincare and personalized gift concepts. Filter the Bloomies catalog and inquire on WhatsApp.",
+  "/shop",
+  { noindex: false },
+);
 export default async function Page() {
   return (
     <section className="container page-section">

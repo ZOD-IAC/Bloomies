@@ -1,6 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { catalog } from "@/lib/catalog";
 import { Cart } from "@/components/cart";
-export const metadata = { title: "Your inquiry bag" };
+export const metadata = pageMetadata(
+  "Your inquiry bag",
+  "Review your gift concepts, options and personalization before sending a WhatsApp inquiry to Bloomies by Aadar.",
+  "/cart",
+  { noindex: true },
+);
 export default async function Page() {
   return (
     <section className="container page-section">

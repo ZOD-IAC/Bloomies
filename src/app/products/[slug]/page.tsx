@@ -1,3 +1,5 @@
+import { pageMetadata } from "@/lib/seo";
+import { productReference } from "@/lib/product-reference";
 import { imageAlt, imageLabel } from "@/lib/product-imagery";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -14,7 +16,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const p = await catalog.bySlug((await params).slug);
-  return { title: p?.name || "Gift not found", description: p?.description };
+  if (!p)
+    return { title: "Gift not found", robots: { index: false, follow: true } };
+  return pageMetadata(p.name, p.description, `/products/${p.slug}`, {
+    noindex: p.availability === "sample",
+    image: p.images[0],
+  });
 }
 export default async function Page({
   params,
@@ -44,6 +51,9 @@ export default async function Page({
             {p.category} · {imageLabel(p)}
           </p>
           <h1>{p.name}</h1>
+          <p className="product-reference">
+            Product reference <code>{productReference(p)}</code>
+          </p>
           <p className="detail-price">
             {money(p.price)} <small>illustrative price</small>
           </p>

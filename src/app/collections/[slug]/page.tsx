@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { categories } from "@/data/products";
 import { catalog } from "@/lib/catalog";
@@ -12,7 +13,20 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  return { title: (await params).slug.replaceAll("-", " ") };
+  const { slug } = await params;
+  const category = categories.find(
+    (c) => c.toLowerCase().replaceAll(" ", "-") === slug,
+  );
+  if (!category)
+    return {
+      title: "Collection not found",
+      robots: { index: false, follow: true },
+    };
+  return pageMetadata(
+    `${category} gift ideas`,
+    `Explore ${category.toLowerCase()} gift concepts from Bloomies by Aadar. Confirm pricing, personalization and availability on inquiry.`,
+    `/collections/${slug}`,
+  );
 }
 export default async function Page({
   params,

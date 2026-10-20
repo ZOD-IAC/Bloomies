@@ -107,4 +107,24 @@ The shared `OwnerSection` component appears on Home and About, using the owner n
 
 Run `npm audit` for the full development tree and `npm run audit:production` for production dependencies. On 2026-10-20, the full tree reported five high entries through the Next.js ESLint → fast-glob → micromatch → braces chain; the production-only audit reported zero vulnerabilities. The upstream advisory lists no patched braces version. Do not run `npm audit fix --force`: its suggested Next.js lint-config downgrade is not appropriate for this Next.js 16 project. Full details and the remaining ESLint support warning are in `docs/dependency-security.md`. No audit findings have been suppressed, and the current full audit is not clean.
 
-The owner portrait is currently local-only: automatic approval review requires explicit permission to publish this identifiable person’s photo to the public GitHub repository. The public source displays an accessible AP monogram fallback when the portrait file is absent. The local version uses the supplied photo. No portrait bytes have been uploaded to GitHub.
+The owner explicitly approved public GitHub upload of the supplied portrait on 2026-10-20. The image is included at `public/images/owner/arpita-prajapati.jpg`; accessible AP initials remain as a fallback if a future replacement fails to load.
+
+## Updating the owner section
+
+Edit `src/data/owner.ts` to update the name, role, paragraphs, or portrait path. Home and About share this record. To change the photo, add a new file such as `public/images/owner/arpita-v2.jpg` and set `portrait` to `/images/owner/arpita-v2.jpg`. A new filename avoids cached images. For framing, adjust `.owner-portrait img` → `object-position` in `src/app/globals.css`. Commit and push the changes to `main`; the connected Vercel project can rebuild automatically. Use photos approved for public use.
+
+## FAQ and WhatsApp product references
+
+Edit the questions and answers in `src/data/faqs.ts`. The homepage's FAQ is rendered using accessible native details/summary elements. No delivery guarantees, refund policy or fees were invented. The footer links directly to it.
+
+WhatsApp messages now include a stable reference (`BLM-001` etc.) and an absolute link to each selected product, alongside quantity, wrap, personalization and estimated total. The reference appears on the product page too. Product IDs should remain stable when the catalog is updated. Links use the production URL from `src/lib/site.ts`.
+
+## SEO and favicon
+
+Default production origin: `https://bloomies-omega.vercel.app`. Set `NEXT_PUBLIC_SITE_URL` in Vercel when moving to a custom domain, then redeploy; the origin is used for canonical URLs, sitemap, social previews, structured data and WhatsApp product links.
+
+Each main page and collection has its own title, description, canonical URL, Open Graph and Twitter metadata. Organization, WebSite and owner Person JSON-LD use supplied business facts only. The cart and coming-soon builder have `noindex, follow`. Products with `availability: 'sample'` also have `noindex, follow` and are excluded from the sitemap; changing a confirmed product's availability enables its inclusion. Do not mark a concept as confirmed merely for indexing. No fabricated Product offers, ratings or stock schema is emitted. The sitemap is `/sitemap.xml`, and crawler guidance is `/robots.txt`. Product social previews remain available even for sample pages.
+
+Favicon source: `public/brand/mark.svg`, with a flower/B monogram that matches the palette. Generated assets: `src/app/favicon.ico`, `src/app/icon.svg`, `src/app/apple-icon.png`. Social card source/output: `public/brand/social-preview.svg` / `.png`. To revise them, edit the source SVGs and run `node scripts/generate-brand-assets.mjs` after `npm ci`. The helper uses sharp already installed by Next.js; it does not run during normal builds. No new application dependencies were added.
+
+After the Vercel deployment is ready, verify the sitemap, robots, canonicals, share preview and favicon against the live domain. Add the site to Google Search Console yourself, complete ownership verification and submit `/sitemap.xml`. Rankings, indexing times and rich-result display cannot be guaranteed. No Search Console account changes were made by the assistant.

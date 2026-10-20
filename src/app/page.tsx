@@ -1,3 +1,10 @@
+import { FaqSection } from "@/components/faq-section";
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata(
+  "Handcrafted bouquets & personalized gifts",
+  "Discover handmade bouquets, gift boxes and personalized gifting ideas from Bloomies by Aadar. Explore the collection and inquire on WhatsApp.",
+  "/",
+);
 import { OwnerSection } from "@/components/owner-section";
 import Image from "@/components/brand-image";
 import Link from "next/link";
@@ -276,6 +283,7 @@ export default async function Home() {
           ))}
         </div>
       </section>
+      <FaqSection />
       <section className="custom-section">
         <Reveal className="container custom-inner">
           <span className="custom-flower" aria-hidden="true">

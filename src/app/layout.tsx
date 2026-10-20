@@ -1,3 +1,5 @@
+import { SITE_URL } from "@/lib/site";
+import { SiteStructuredData } from "@/components/site-structured-data";
 import { MotionProvider, ScrollProgress } from "@/components/motion";
 import { MessageCircle } from "lucide-react";
 import { business } from "@/lib/business";
@@ -21,6 +23,9 @@ const sans = localFont({
   display: "swap",
 });
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Bloomies by Aadar",
+  robots: { index: true, follow: true },
   title: {
     default: "Bloomies by Aadar — Little things, big feelings",
     template: "%s | Bloomies by Aadar",
@@ -46,6 +51,7 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <SiteStructuredData />
         <MotionProvider>
           <CartProvider>
             <ScrollProgress />
@@ -72,6 +78,7 @@ export default function RootLayout({
                 <div>
                   <p className="eyebrow">SAY HELLO</p>
                   <Link href="/contact">Contact us</Link>
+                  <Link href="/#faq">Frequently asked questions</Link>
                   <a
                     href="https://www.instagram.com/bloomies_by_aadar"
                     target="_blank"

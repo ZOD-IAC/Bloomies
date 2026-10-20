@@ -1,3 +1,4 @@
+import { owner } from "@/data/owner";
 import { OwnerPortrait } from "@/components/owner-portrait";
 import Link from "next/link";
 import { ArrowUpRight, Heart } from "lucide-react";
@@ -26,21 +27,14 @@ export function OwnerSection() {
         <h2 id="owner-heading">
           A little hello
           <br />
-          from <em>Arpita.</em>
+          from <em>{owner.firstName}.</em>
         </h2>
         <div className="owner-identity">
-          <h3>Arpita Prajapati</h3>
-          <p>Owner · Bloomies by Aadar</p>
+          <h3>{owner.name}</h3>
+          <p>{owner.role}</p>
         </div>
-        <p>
-          Behind Bloomies by Aadar is Arpita Prajapati — the person to talk to
-          about your next thoughtful gift.
-        </p>
-        <p>
-          Have a favourite colour, a personal message, or a very specific
-          occasion in mind? Start with your idea and discuss the details
-          together.
-        </p>
+        <p>{owner.introduction}</p>
+        <p>{owner.invitation}</p>
         <Link className="button button-primary" href="/contact">
           Let’s talk about your gift <ArrowUpRight size={18} />
         </Link>
